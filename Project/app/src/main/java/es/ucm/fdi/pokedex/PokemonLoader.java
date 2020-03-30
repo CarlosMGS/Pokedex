@@ -11,21 +11,44 @@ import java.util.List;
 public class PokemonLoader extends AsyncTaskLoader<PokemonInfo> {
 
 
-    public PokemonLoader(@NonNull Context context) {
+    private PokeApiConn pokemonService;
+    private String queryString;
+
+    public PokemonLoader(@NonNull Context context, String queryString) {
         super(context);
+
+        this.queryString = queryString;
+        this.pokemonService = new PokeApiConn();
     }
 
     @Nullable
     @Override
     public PokemonInfo loadInBackground() {
 
-        PokemonInfo pokemon = PokemonInfo.fromJsonResponse("");
-        return null;
+        PokemonInfo pokemon;
+        pokemon = LoadData(queryString);
+
+        return pokemon;
     }
 
     @Override
     protected void onStartLoading(){
+
         forceLoad();
+
+    }
+
+    protected PokemonInfo LoadData(String queryString){
+
+        PokemonInfo info;
+        info = pokemonService.pokemonRetriever(queryString);
+        if(info != null){
+            return info;
+
+        } else{
+
+            return null;
+        }
     }
 
 

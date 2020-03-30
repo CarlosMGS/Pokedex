@@ -70,7 +70,7 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
     }
 
-    public void updateBooksResultList(PokemonInfo info){
+    public void updatePokemonResults(PokemonInfo info){
 
         pokera.setPokemonData(info);
         pokera.notifyDataSetChanged();
@@ -81,16 +81,37 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
     @NonNull
     @Override
     public Loader<PokemonInfo> onCreateLoader(int id, @Nullable Bundle args) {
-        return null;
+
+        ((TextView)findViewById(R.id.textState)).setText("Loading...");
+
+        return new PokemonLoader(this, args.getString(EXTRA_QUERY));
+
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<PokemonInfo> loader, PokemonInfo data) {
+
+
+
+        if (data!= null) {
+
+            //actualiza los datos de la recyclerview
+            this.updatePokemonResults(data);
+            ((TextView)findViewById(R.id.textState)).setText("Results");
+        }
+        else {
+
+            //no se encuentran casos
+            updatePokemonResults(new PokemonInfo());
+            ((TextView)findViewById(R.id.textState)).setText("No Results Found");
+        }
 
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<PokemonInfo> loader) {
 
+        loader.reset();
+        pokera.notifyDataSetChanged();
     }
 }
