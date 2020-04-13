@@ -73,7 +73,7 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
     public void updatePokemonResults(PokemonInfo info){
 
         pokera.setPokemonData(info);
-        pokera.notifyDataSetChanged();
+        
 
     }
 

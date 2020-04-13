@@ -22,10 +22,11 @@ public class PokeApiConn {
     public String createURL(String queryString){
 
         String queryParam = "";
+        queryString = queryString.toLowerCase();
 
         // Build up the query URI, limiting results to 5 printed books.
         Uri builtURI = Uri.parse(BASE_URL).buildUpon()
-                .appendQueryParameter(queryParam, queryString)
+                .appendPath(queryString)
                 .build();
 
         return builtURI.toString();
