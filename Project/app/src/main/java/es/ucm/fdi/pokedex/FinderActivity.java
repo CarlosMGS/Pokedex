@@ -1,5 +1,6 @@
 package es.ucm.fdi.pokedex;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,8 +25,14 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
     private static final int POK_LOADER_ID = 100;
     private static final String EXTRA_QUERY = "queryString";
     private RecyclerView pokemonRView;
-    private PokemonResultsAdapter pokera;
+    private PokemonResultsAdapter pokeResultsAdapter;
     private String pokeText;
+
+    private TextView name;
+    private TextView index;
+    private TextView types;
+
+    private CardView card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +52,9 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
         PokemonInfo info = new PokemonInfo();
 
         pokemonRView = findViewById(R.id.pokemonView);
-        pokera= new PokemonResultsAdapter(this, info);
+        pokeResultsAdapter= new PokemonResultsAdapter(this, info);
 
-        pokemonRView.setAdapter(pokera);
+        pokemonRView.setAdapter(pokeResultsAdapter);
         // Give the RecyclerView a default layout manager.
         pokemonRView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -72,8 +80,21 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
     public void updatePokemonResults(PokemonInfo info){
 
-        pokera.setPokemonData(info);
-        
+        /*
+        pokeResultsAdapter.setPokemonData(info);
+        pokeResultsAdapter.notifyDataSetChanged();
+        */
+
+        name = (TextView) findViewById(R.id.pokename);
+        index = (TextView) findViewById(R.id.pokeid);
+        types = (TextView) findViewById(R.id.poketypes);
+        card = (CardView) findViewById(R.id.cardView);
+
+        card.setCardBackgroundColor(Color.rgb(255,255,255));
+
+        name.setText(info.getName());
+        index.setText("Nº "+info.getIndex());
+        types.setText(info.getTypes());
 
     }
 
@@ -112,6 +133,6 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
     public void onLoaderReset(@NonNull Loader<PokemonInfo> loader) {
 
         loader.reset();
-        pokera.notifyDataSetChanged();
+        pokeResultsAdapter.notifyDataSetChanged();
     }
 }
