@@ -42,11 +42,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(finder);
     }
 
+    /*
     public void goToFavs(View view){
         Intent favs = new Intent(this, FavsActivity.class);
 
         startActivity(favs);
-    }
+    }*/
 
 
 }

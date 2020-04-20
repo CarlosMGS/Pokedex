@@ -1,5 +1,6 @@
 package es.ucm.fdi.pokedex;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -134,5 +135,11 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
         loader.reset();
         pokeResultsAdapter.notifyDataSetChanged();
+    }
+
+    public void loadPokemonView(View view){
+        Intent poked = new Intent(this, PokemonViewActivity.class);
+
+        startActivity(poked);
     }
 }

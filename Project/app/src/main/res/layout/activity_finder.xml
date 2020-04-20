@@ -74,6 +74,7 @@
         android:layout_width="411dp"
         android:layout_height="164dp"
         android:layout_marginTop="50dp"
+        android:onClick="loadPokemonView"
         app:cardBackgroundColor="#F44336"
         app:cardCornerRadius="6dp"
         app:cardElevation="7dp"

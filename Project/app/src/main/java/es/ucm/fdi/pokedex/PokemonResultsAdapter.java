@@ -4,20 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.zip.Inflater;
+import java.util.List;
 
 public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAdapter.PokemonViewHolder> {
 
-    private PokemonInfo pokemon;
+    private List<PokemonInfo> pokemons;
     private LayoutInflater inflater;
 
-    public PokemonResultsAdapter(Context context, PokemonInfo info) {
-        pokemon = info;
+    public PokemonResultsAdapter(Context context, List<PokemonInfo> info) {
+        pokemons = info;
 
         inflater = LayoutInflater.from(context);
     }
@@ -31,25 +32,26 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
 
     @Override
     public void onBindViewHolder(@NonNull PokemonViewHolder holder, int position) {
-        PokemonInfo current = pokemon;
+        PokemonInfo current = pokemons.get(position);
         holder.name.setText(current.getName());
         holder.index.setText(current.getIndex());
-        holder.types.setText(current.getTypes());
+       //holder.image.setImageDrawable();
     }
     @Override
     public int getItemCount() {
         return 0;
     }
 
-    public void setPokemonData(PokemonInfo info) {
-        pokemon = info;
+    public void setPokemonData(List<PokemonInfo> info) {
+        pokemons = info;
     }
 
     public class PokemonViewHolder extends RecyclerView.ViewHolder{
 
         private TextView name;
         private TextView index;
-        private TextView types;
+
+        private ImageView image;
 
         private PokemonResultsAdapter adapter;
 
@@ -61,7 +63,7 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
 
             name = (TextView) view.findViewById(R.id.PokemonName);
             index = (TextView) view.findViewById(R.id.PokemonIndex);
-            types = (TextView) view.findViewById(R.id.PokemonType);
+            image = (ImageView) view.findViewById(R.id.PokemonImage);
 
             this.adapter = adapter;
         }

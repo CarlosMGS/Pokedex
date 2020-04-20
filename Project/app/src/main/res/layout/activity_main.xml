@@ -43,17 +43,6 @@
             android:text="Finder"
             android:textColor="#FFC107" />
 
-        <Button
-            android:id="@+id/ButtonFavs"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#2196F3"
-            android:onClick="goToFavs"
-            android:text="Favourites"
-            android:textColor="#FFC107" />
     </LinearLayout>
 
     <TextView
