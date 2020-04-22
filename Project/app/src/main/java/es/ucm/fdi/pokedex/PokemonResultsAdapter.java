@@ -39,7 +39,7 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
     }
     @Override
     public int getItemCount() {
-        return 0;
+        return pokemons.size();
     }
 
     public void setPokemonData(List<PokemonInfo> info) {

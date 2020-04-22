@@ -10,6 +10,9 @@ class PokemonInfo {
     private String name;
     private String index;
     private String types;
+    private String height;
+    private String weight;
+    private String image;
 
     public String getName() {
         return name;
@@ -35,6 +38,18 @@ class PokemonInfo {
         this.types = types;
     }
 
+    public String getHeight() { return height; }
+
+    public void setHeight(String height) { this.height = height; }
+
+    public String getWeight() { return weight; }
+
+    public void setWeight(String weight) { this.weight = weight; }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image = image; }
+
     public static PokemonInfo fromJsonResponse(String input){
         PokemonInfo pokemon = new PokemonInfo();
 
@@ -58,6 +73,14 @@ class PokemonInfo {
 
             }
             pokemon.setTypes(types_s);
+
+            //load height and weight
+            pokemon.setHeight(json.get("height").toString());
+            pokemon.setWeight(json.get("weight").toString());
+
+            //load sprite
+            JSONArray sprites = (JSONArray) json.get("sprites");
+            String frontDefaultSprite = sprites.getString(Integer.parseInt("front_default"));
 
         }catch(Exception e){
             e.printStackTrace();
