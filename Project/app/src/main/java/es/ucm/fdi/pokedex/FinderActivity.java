@@ -51,9 +51,12 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
         }
 
         PokemonInfo info = new PokemonInfo();
+        // esto crea una lista que solo tendrá un pokemon
+        List<PokemonInfo> list = new ArrayList<>();
+        list.add(info);
 
         pokemonRView = findViewById(R.id.pokemonView);
-        pokeResultsAdapter= new PokemonResultsAdapter(this, info);
+        pokeResultsAdapter= new PokemonResultsAdapter(this, list); // en lugar de pasar un solo poke, se pasa una lista de un solo poke
 
         pokemonRView.setAdapter(pokeResultsAdapter);
         // Give the RecyclerView a default layout manager.

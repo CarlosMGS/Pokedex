@@ -14,6 +14,19 @@ class PokemonInfo {
     private String weight;
     private String image;
 
+    public PokemonInfo() {
+
+    }
+
+    public PokemonInfo(String name, String index, String types, String height, String weight, String image) {
+        this.name = name;
+        this.index = index;
+        this.types = types;
+        this.height = height;
+        this.weight = weight;
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }
