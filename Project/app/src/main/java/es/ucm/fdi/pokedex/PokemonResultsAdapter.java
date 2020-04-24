@@ -35,7 +35,7 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
         PokemonInfo current = pokemons.get(position);
         holder.name.setText(current.getName());
         holder.index.setText(current.getIndex());
-       //holder.image.setImageDrawable();
+        holder.image.setImageResource(current.getImage());
     }
     @Override
     public int getItemCount() {

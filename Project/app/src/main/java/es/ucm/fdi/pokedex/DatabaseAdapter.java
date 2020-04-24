@@ -74,7 +74,7 @@ public class DatabaseAdapter {
             // Assign values for each column.
             newValues.put("id", id);
             newValues.put("name", name);
-            newValues.put("captures", captured);
+            newValues.put("captured", captured);
 
             // Insert the row into your table
             db = dbHelper.getWritableDatabase();
@@ -186,7 +186,10 @@ public class DatabaseAdapter {
                 e.printStackTrace();
 
                 // Close the connection
-            } finally {
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+            finally {
                 conn.disconnect();
                 if (response != null) {
                     response.close();

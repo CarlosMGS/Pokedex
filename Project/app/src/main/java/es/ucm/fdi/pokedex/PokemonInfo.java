@@ -1,5 +1,6 @@
 package es.ucm.fdi.pokedex;
 
+import android.graphics.drawable.Drawable;
 import android.util.JsonReader;
 
 import org.json.JSONArray;
@@ -12,13 +13,13 @@ class PokemonInfo {
     private String types;
     private String height;
     private String weight;
-    private String image;
+    private int image;
 
     public PokemonInfo() {
 
     }
 
-    public PokemonInfo(String name, String index, String types, String height, String weight, String image) {
+    public PokemonInfo(String name, String index, String types, String height, String weight, int image) {
         this.name = name;
         this.index = index;
         this.types = types;
@@ -59,9 +60,9 @@ class PokemonInfo {
 
     public void setWeight(String weight) { this.weight = weight; }
 
-    public String getImage() { return image; }
+    public int getImage() { return image; }
 
-    public void setImage(String image) { this.image = image; }
+    public void setImage(int image) { this.image = image; }
 
     public static PokemonInfo fromJsonResponse(String input){
         PokemonInfo pokemon = new PokemonInfo();

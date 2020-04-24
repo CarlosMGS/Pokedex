@@ -20,7 +20,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         try {
             db.execSQL(DatabaseAdapter.DATABASE_CREATE);
         }catch(Exception er){
-            Log.e("Error","exceptioin");
+            Log.e("Error","exception");
 
         }
     }

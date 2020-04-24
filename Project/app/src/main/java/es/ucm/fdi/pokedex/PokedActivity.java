@@ -41,14 +41,22 @@ public class PokedActivity extends AppCompatActivity {
     protected void readPokemon(){
         String[] row;
         PokemonInfo info;
+        int id;
+        int ima;
+        String img;
 
         for(int i = 0; i < MAX_POKEMON; i++ ){
-            row = dba.getSinlgeEntry(i+1);
+
+            id = i+1;
+            row = dba.getSinlgeEntry(id);
 
             info = new PokemonInfo();
             info.setIndex(row[0]);
             info.setName(row[1]);
-
+            //info.setImage(R.drawable.1);
+            img = "img" + id;
+            ima = getResources().getIdentifier("@drawable/" + img, null, null);
+            info.setImage(ima);
             pokemons.add(info);
         }
     }

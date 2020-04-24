@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         getSupportActionBar().hide();
 
         ConnectivityManager cm = (ConnectivityManager) this.getSystemService(this.CONNECTIVITY_SERVICE);
@@ -37,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }else{
             if(!isdbConfigured()){
-                //dba.initialize();
+                dba.initialize();
             }
         }
 
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if(count != 0){
+        if(count >1 ){
             return true;
         }else{
             return false;
