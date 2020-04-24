@@ -3,6 +3,8 @@ package es.ucm.fdi.pokedex;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DatabaseAdapter dba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +26,19 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
+        dba = new DatabaseAdapter(getApplicationContext());
+
+
         //if the app is offline, the finder gets disabled
         if(!isConnected){
             ((Button) findViewById(R.id.ButtonFinder)).setEnabled(false);
+            if(!isdbConfigured()){
+                ((Button) findViewById(R.id.ButtonPokedex)).setEnabled(false);
+            }
+        }else{
+            if(!isdbConfigured()){
+                //dba.initialize();
+            }
         }
 
 
@@ -48,6 +62,30 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(favs);
     }*/
+
+    public boolean isdbConfigured(){
+        dba.open();
+        SQLiteDatabase db = dba.getDatabaseInstance();
+        final Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM pokemon;", null);
+        int count = 0;
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    count = cursor.getInt(0);
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+
+        if(count != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
 
 
 }
