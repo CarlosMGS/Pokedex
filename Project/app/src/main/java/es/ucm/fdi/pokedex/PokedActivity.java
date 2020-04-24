@@ -1,5 +1,6 @@
 package es.ucm.fdi.pokedex;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,7 +56,8 @@ public class PokedActivity extends AppCompatActivity {
             info.setName(row[1]);
             //info.setImage(R.drawable.1);
             img = "img" + id;
-            ima = getResources().getIdentifier("@drawable/" + img, null, null);
+            Resources res = getResources();
+            ima = res.getIdentifier(img, "drawable", getPackageName());
             info.setImage(ima);
             pokemons.add(info);
         }
