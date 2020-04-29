@@ -51,6 +51,7 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
         }
 
         PokemonInfo info = new PokemonInfo();
+
         // esto crea una lista que solo tendrá un pokemon
         List<PokemonInfo> list = new ArrayList<>();
         list.add(info);
@@ -98,8 +99,14 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
         name.setText(info.getName());
         index.setText("Nº "+info.getIndex());
-        types.setText(info.getTypes());
 
+        if (info.getTypes().size() == 1){
+            types.setText(info.getTypes().get(0));
+        }
+        else{
+            String typesList = info.getTypes().get(0) + " - " + info.getTypes().get(1);
+            types.setText(typesList);
+        }
     }
 
 

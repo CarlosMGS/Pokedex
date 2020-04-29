@@ -14,11 +14,11 @@ import java.util.List;
 
 public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAdapter.PokemonViewHolder> {
 
-    private List<PokemonInfo> pokemons;
+    private List<PokemonInfo> pokemonList;
     private LayoutInflater inflater;
 
     public PokemonResultsAdapter(Context context, List<PokemonInfo> info) {
-        pokemons = info;
+        pokemonList = info;
 
         inflater = LayoutInflater.from(context);
     }
@@ -32,18 +32,18 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
 
     @Override
     public void onBindViewHolder(@NonNull PokemonViewHolder holder, int position) {
-        PokemonInfo current = pokemons.get(position);
+        PokemonInfo current = pokemonList.get(position);
         holder.name.setText(current.getName());
         holder.index.setText(current.getIndex());
         holder.image.setImageResource(current.getImage());
     }
     @Override
     public int getItemCount() {
-        return pokemons.size();
+        return pokemonList.size();
     }
 
     public void setPokemonData(List<PokemonInfo> info) {
-        pokemons = info;
+        pokemonList = info;
     }
 
     public class PokemonViewHolder extends RecyclerView.ViewHolder{

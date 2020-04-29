@@ -1,16 +1,16 @@
 package es.ucm.fdi.pokedex;
 
-import android.graphics.drawable.Drawable;
-import android.util.JsonReader;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class PokemonInfo {
 
     private String name;
     private String index;
-    private String types;
+    private List<String> types;
     private String height;
     private String weight;
     private int image;
@@ -19,7 +19,7 @@ class PokemonInfo {
 
     }
 
-    public PokemonInfo(String name, String index, String types, String height, String weight, int image) {
+    public PokemonInfo(String name, String index, List<String> types, String height, String weight, int image) {
         this.name = name;
         this.index = index;
         this.types = types;
@@ -44,11 +44,11 @@ class PokemonInfo {
         this.index = index;
     }
 
-    public String getTypes() {
+    public List<String> getTypes() {
         return types;
     }
 
-    public void setTypes(String types) {
+    public void setTypes(List<String> types) {
         this.types = types;
     }
 
@@ -77,16 +77,16 @@ class PokemonInfo {
             //JSONArray indices = (JSONArray) json.get("game_indices");
             pokemon.setIndex(json.get("id").toString());
 
-            String types_s = "";
+            ArrayList<String> typesList = new ArrayList<>();
             JSONArray types = (JSONArray) json.get("types");
             for(int i = 0; i<types.length(); i++){
 
                 JSONObject type = types.getJSONObject(i);
                 JSONObject ty = type.getJSONObject("type");
-                types_s += ty.getString("name") + " ";
+                typesList.add(ty.getString("name"));
 
             }
-            pokemon.setTypes(types_s);
+            pokemon.setTypes(typesList);
 
             //load height and weight
             pokemon.setHeight(json.get("height").toString());
