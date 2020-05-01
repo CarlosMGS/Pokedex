@@ -23,8 +23,8 @@ import es.ucm.fdi.pokedex.R;
 
 public class FinderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<PokemonInfo>{
 
-    private static final int POK_LOADER_ID = 100;
-    private static final String EXTRA_QUERY = "queryString";
+    public static final int POK_LOADER_ID = 100;
+    public static final String EXTRA_QUERY = "queryString";
     private RecyclerView pokemonRView;
     private PokemonResultsAdapter pokeResultsAdapter;
     private String pokeText;
@@ -57,7 +57,7 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
         list.add(info);
 
         pokemonRView = findViewById(R.id.pokemonView);
-        pokeResultsAdapter= new PokemonResultsAdapter(this, list); // en lugar de pasar un solo poke, se pasa una lista de un solo poke
+        //pokeResultsAdapter= new PokemonResultsAdapter(this, list); // en lugar de pasar un solo poke, se pasa una lista de un solo poke
 
         pokemonRView.setAdapter(pokeResultsAdapter);
         // Give the RecyclerView a default layout manager.

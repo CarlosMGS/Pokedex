@@ -16,11 +16,14 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
 
     private List<PokemonInfo> pokemonList;
     private LayoutInflater inflater;
+    private DatabaseAdapter dba;
 
-    public PokemonResultsAdapter(Context context, List<PokemonInfo> info) {
+    public PokemonResultsAdapter(Context context, List<PokemonInfo> info, DatabaseAdapter dba) {
         pokemonList = info;
 
         inflater = LayoutInflater.from(context);
+
+        this.dba = dba;
     }
 
     @NonNull
@@ -36,6 +39,16 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
         holder.name.setText(current.getName());
         holder.index.setText(current.getIndex());
         holder.image.setImageResource(current.getImage());
+
+        String[] row = dba.getSinlgeEntry(Integer.parseInt(current.getIndex()));
+
+        if(Boolean.valueOf(row[2])){
+            holder.imageball.setImageResource(R.drawable.pokeball);
+        }
+
+
+
+
     }
     @Override
     public int getItemCount() {
@@ -52,6 +65,7 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
         private TextView index;
 
         private ImageView image;
+        private ImageView imageball;
 
         private PokemonResultsAdapter adapter;
 
@@ -64,6 +78,7 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
             name = (TextView) view.findViewById(R.id.PokemonName);
             index = (TextView) view.findViewById(R.id.PokemonIndex);
             image = (ImageView) view.findViewById(R.id.PokemonImage);
+            imageball = (ImageView) view.findViewById(R.id.imageball);
 
             this.adapter = adapter;
         }

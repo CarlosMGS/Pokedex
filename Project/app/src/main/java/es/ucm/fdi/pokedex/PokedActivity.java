@@ -1,9 +1,15 @@
 package es.ucm.fdi.pokedex;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PokedActivity extends AppCompatActivity {
+
+
 
     private PokemonResultsAdapter pokeResultsAdapter;
     private final int MAX_POKEMON = 807;
@@ -32,11 +40,29 @@ public class PokedActivity extends AppCompatActivity {
 
         //cargamos los pokemon en el results adapter para modificar la vista
         pokemonRView = findViewById(R.id.pokedRecycler);
-        pokeResultsAdapter = new PokemonResultsAdapter(this, pokemons);
+        pokeResultsAdapter = new PokemonResultsAdapter(this, pokemons, dba);
 
         pokemonRView.setAdapter(pokeResultsAdapter);
         // Give the RecyclerView a default layout manager.
         pokemonRView.setLayoutManager(new LinearLayoutManager(this));
+
+        CardView cv = (CardView) findViewById(R.id.cardView);
+
+        /*
+        cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent poked = new Intent(PokedActivity.this, FinderActivity.class);
+
+                String name = ((TextView)findViewById(R.id.PokemonName)).getText().toString();
+
+                ((EditText)findViewById(R.id.textPokemon)).setText(name);
+
+                startActivity(poked);
+            }
+        });
+        */
+
     }
 
     protected void readPokemon(){
@@ -62,4 +88,6 @@ public class PokedActivity extends AppCompatActivity {
             pokemons.add(info);
         }
     }
+
+
 }
