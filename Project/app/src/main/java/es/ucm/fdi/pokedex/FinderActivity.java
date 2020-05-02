@@ -152,7 +152,11 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
     public void loadPokemonView(View view){
         Intent poked = new Intent(this, PokemonViewActivity.class);
-
+        poked.putExtra("index", pokemonInfo.getIndex());
+        poked.putExtra("name", pokemonInfo.getName());
+        poked.putExtra("weight", pokemonInfo.getWeight());
+        poked.putExtra("height", pokemonInfo.getHeight());
+        poked.putStringArrayListExtra("types", (ArrayList<String>) pokemonInfo.getTypes());
         startActivity(poked);
     }
 }

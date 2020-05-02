@@ -1,5 +1,6 @@
 package es.ucm.fdi.pokedex;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,9 +30,7 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon_view);
-
-
-        PokemonInfo info = new PokemonInfo();
+        getSupportActionBar().hide();
 
         pokemonImage = (ImageView) findViewById(R.id.PokemonImage);
         pokemonName = (TextView) findViewById(R.id.PokemonName);
@@ -42,12 +41,23 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         recyclerType.setHasFixedSize(true);
         recyclerType.setLayoutManager(new LinearLayoutManager(this));
 
+        PokemonInfo info = new PokemonInfo(getIntent().getExtras().getString("name"),
+                getIntent().getExtras().getString("index"),
+                getIntent().getExtras().getStringArrayList("types"),
+                getIntent().getExtras().getString("weight"),
+                getIntent().getExtras().getString("height"),
+                -1);
+
         setPokemonInfo(info);
     }
 
     private void setPokemonInfo(PokemonInfo info) {
 
         // image view
+        String imageString = "img" + info.getIndex();
+        Resources res = getResources();
+        int imageInt = res.getIdentifier(imageString, "drawable", getPackageName());
+        info.setImage(imageInt);
 
         pokemonName.setText(info.getName());
         pokemonWeight.setText("Weight " + info.getWeight());
