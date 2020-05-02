@@ -35,6 +35,8 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
     private CardView card;
 
+    private PokemonInfo pokemonInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,11 +52,11 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
             loaderManager.initLoader(POK_LOADER_ID, null, this);
         }
 
-        PokemonInfo info = new PokemonInfo();
+        pokemonInfo = new PokemonInfo();
 
         // esto crea una lista que solo tendrá un pokemon
         List<PokemonInfo> list = new ArrayList<>();
-        list.add(info);
+        list.add(pokemonInfo);
 
         pokemonRView = findViewById(R.id.pokemonView);
         //pokeResultsAdapter= new PokemonResultsAdapter(this, list); // en lugar de pasar un solo poke, se pasa una lista de un solo poke
@@ -125,16 +127,17 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
 
 
-        if (data!= null) {
+        if (data.getIndex()!= null) {
 
             //actualiza los datos de la recyclerview
             this.updatePokemonResults(data);
+            pokemonInfo = data;
             ((TextView)findViewById(R.id.textState)).setText("Results");
         }
         else {
 
             //no se encuentran casos
-            updatePokemonResults(new PokemonInfo());
+            /*updatePokemonResults(new PokemonInfo());*/
             ((TextView)findViewById(R.id.textState)).setText("No Results Found");
         }
 

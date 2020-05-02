@@ -16,6 +16,7 @@
         <activity android:name=".FinderActivity"></activity>
         <activity android:name=".FavsActivity"></activity>
         <activity android:name=".PokedActivity"></activity>
+        <activity android:name=".PokemonViewActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
