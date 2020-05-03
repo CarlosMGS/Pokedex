@@ -24,4 +24,5 @@
         app:mcv_textColor="@android:color/white"
         ></com.robertlevonyan.views.chip.Chip>
 
+
 </RelativeLayout>

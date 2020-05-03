@@ -31,13 +31,13 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon_view);
 
-        pokemonImage = (ImageView) findViewById(R.id.PokemonImage);
-        pokemonIndex = (TextView) findViewById(R.id.PokemonIndex);
-        pokemonName = (TextView) findViewById(R.id.PokemonName);
-        pokemonWeight = (TextView) findViewById(R.id.PokemonWeight);
-        pokemonHeight = (TextView) findViewById(R.id.PokemonHeight);
+        pokemonImage = findViewById(R.id.PokemonImage);
+        pokemonIndex = findViewById(R.id.PokemonIndex);
+        pokemonName = findViewById(R.id.PokemonName);
+        pokemonWeight = findViewById(R.id.PokemonWeight);
+        pokemonHeight = findViewById(R.id.PokemonHeight);
 
-        recyclerType = (RecyclerView) findViewById(R.id.recycler_type);
+        recyclerType = findViewById(R.id.recycler_type);
         recyclerType.setHasFixedSize(true);
         recyclerType.setLayoutManager(new LinearLayoutManager(this));
 

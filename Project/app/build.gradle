@@ -36,4 +36,5 @@ dependencies {
 
     // android materials
     implementation 'com.robertlevonyan.view:MaterialChipView:1.2.4'
+
 }
