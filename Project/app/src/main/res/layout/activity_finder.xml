@@ -29,6 +29,7 @@
         android:hint="Pokemon"
         android:inputType="textPersonName"
         android:textColor="#FFC107"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFinder" />

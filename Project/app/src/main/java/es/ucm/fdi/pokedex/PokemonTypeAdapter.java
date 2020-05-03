@@ -66,7 +66,6 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
 
 
 
-
     /* get the color of each type */
     public int getColorByType(String type) {
         switch(type)

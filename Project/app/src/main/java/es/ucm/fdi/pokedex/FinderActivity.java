@@ -82,7 +82,6 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
         Bundle queryBundle = new Bundle();
         queryBundle.putString(this.EXTRA_QUERY, queryString);
         LoaderManager.getInstance(this).restartLoader(POK_LOADER_ID, queryBundle, this);
-
     }
 
     public void updatePokemonResults(PokemonInfo info){

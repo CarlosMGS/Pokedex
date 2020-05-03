@@ -21,7 +21,7 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
 
     public static final String EXTRA_QUERY = "queryString";
     private ImageView pokemonImage;
-    private TextView pokemonName, pokemonWeight, pokemonHeight;
+    private TextView pokemonIndex, pokemonName, pokemonWeight, pokemonHeight;
     private RecyclerView recyclerType;
 
     public PokemonViewActivity() {}
@@ -30,9 +30,9 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon_view);
-        getSupportActionBar().hide();
 
         pokemonImage = (ImageView) findViewById(R.id.PokemonImage);
+        pokemonIndex = (TextView) findViewById(R.id.PokemonIndex);
         pokemonName = (TextView) findViewById(R.id.PokemonName);
         pokemonWeight = (TextView) findViewById(R.id.PokemonWeight);
         pokemonHeight = (TextView) findViewById(R.id.PokemonHeight);
@@ -58,10 +58,12 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         Resources res = getResources();
         int imageInt = res.getIdentifier(imageString, "drawable", getPackageName());
         info.setImage(imageInt);
+        pokemonImage.setImageResource(info.getImage());
 
+        pokemonIndex.setText(info.getIndex());
         pokemonName.setText(info.getName());
-        pokemonWeight.setText("Weight " + info.getWeight());
-        pokemonHeight.setText("Height " + info.getHeight());
+        pokemonWeight.setText(info.getWeight());
+        pokemonHeight.setText(info.getHeight());
 
         /* lista auxiliar que contiene el único pokemon que buscamos */
         List<PokemonInfo> auxList = new ArrayList<>();
@@ -74,8 +76,7 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
     @NonNull
     @Override
     public Loader<PokemonInfo> onCreateLoader(int id, @Nullable Bundle args) {
-
-        return new PokemonLoader(this, args.getString(EXTRA_QUERY));
+        return null;
     }
 
     @Override
