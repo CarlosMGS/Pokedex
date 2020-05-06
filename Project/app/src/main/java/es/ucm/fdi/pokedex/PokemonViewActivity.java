@@ -2,6 +2,8 @@ package es.ucm.fdi.pokedex;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,8 +23,10 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
 
     public static final String EXTRA_QUERY = "queryString";
     private ImageView pokemonImage;
-    private TextView pokemonIndex, pokemonName, pokemonWeight, pokemonHeight;
+    private TextView pokemonIndex, pokemonName, pokemonWeight, pokemonHeight, pokemonCaptured;
     private RecyclerView recyclerType;
+    private DatabaseAdapter dba;
+    private PokemonInfo info;
 
     public PokemonViewActivity() {}
 
@@ -36,22 +40,26 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         pokemonName = findViewById(R.id.PokemonName);
         pokemonWeight = findViewById(R.id.PokemonWeight);
         pokemonHeight = findViewById(R.id.PokemonHeight);
+        pokemonCaptured = findViewById(R.id.PokemonCaptured);
 
         recyclerType = findViewById(R.id.recycler_type);
         recyclerType.setHasFixedSize(true);
         recyclerType.setLayoutManager(new LinearLayoutManager(this));
 
-        PokemonInfo info = new PokemonInfo(getIntent().getExtras().getString("name"),
+        dba = new DatabaseAdapter(this);
+
+        info = new PokemonInfo(getIntent().getExtras().getString("name"),
                 getIntent().getExtras().getString("index"),
                 getIntent().getExtras().getStringArrayList("types"),
                 getIntent().getExtras().getString("weight"),
                 getIntent().getExtras().getString("height"),
                 -1);
 
-        setPokemonInfo(info);
+
+        setPokemonInfo();
     }
 
-    private void setPokemonInfo(PokemonInfo info) {
+    private void setPokemonInfo() {
 
         // image view
         String imageString = "img" + info.getIndex();
@@ -65,12 +73,41 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         pokemonWeight.setText(info.getWeight());
         pokemonHeight.setText(info.getHeight());
 
+        isCaptured();
+
         /* lista auxiliar que contiene el único pokemon que buscamos */
         List<PokemonInfo> auxList = new ArrayList<>();
         auxList.add(info);
 
         PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(this, auxList);
         recyclerType.setAdapter(pokemonTypeAdapter);
+    }
+
+    public void isCaptured(){
+
+        int position = Integer.parseInt(info.getIndex());
+        String[] row = dba.getSinlgeEntry(position);
+
+        if(Boolean.getBoolean(row[2])){
+            pokemonCaptured.setText("Captured");
+            //deshabilitar boton
+            ((Button) findViewById(R.id.buttonCapture)).setEnabled(false);
+
+        }else{
+            pokemonCaptured.setText("Not captured");
+            //habilitar boton
+            ((Button) findViewById(R.id.buttonCapture)).setEnabled(true);
+
+        }
+    }
+
+    public void capturar(View view){
+        int id = Integer.parseInt(info.getIndex());
+        dba.modifySingleEntry(id);
+
+        pokemonCaptured.setText("Captured");
+        //deshabilitar boton
+        ((Button) findViewById(R.id.buttonCapture)).setEnabled(false);
     }
 
     @NonNull

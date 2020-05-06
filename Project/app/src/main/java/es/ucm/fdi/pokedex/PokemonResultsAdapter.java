@@ -1,6 +1,8 @@
 package es.ucm.fdi.pokedex;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +19,23 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
     private List<PokemonInfo> pokemonList;
     private LayoutInflater inflater;
     private DatabaseAdapter dba;
+    private OnPokemonListener mOnPokemonListener;
 
-    public PokemonResultsAdapter(Context context, List<PokemonInfo> info, DatabaseAdapter dba) {
+    public PokemonResultsAdapter(Context context, List<PokemonInfo> info, DatabaseAdapter dba,
+                                 OnPokemonListener onPokemonListener) {
         pokemonList = info;
 
         inflater = LayoutInflater.from(context);
 
         this.dba = dba;
+        this.mOnPokemonListener = onPokemonListener;
     }
 
     @NonNull
     @Override
     public PokemonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View rootView = inflater.inflate(R.layout.pokemon_preview, parent, false);
-        return new PokemonViewHolder(rootView, this);
+        return new PokemonViewHolder(rootView, this, mOnPokemonListener);
     }
 
     @Override
@@ -42,14 +47,13 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
 
         String[] row = dba.getSinlgeEntry(Integer.parseInt(current.getIndex()));
 
-        if(Boolean.valueOf(row[2])){
+        if (Boolean.valueOf(row[2])) {
             holder.imageball.setImageResource(R.drawable.pokeball);
         }
 
 
-
-
     }
+
     @Override
     public int getItemCount() {
         return pokemonList.size();
@@ -59,7 +63,7 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
         pokemonList = info;
     }
 
-    public class PokemonViewHolder extends RecyclerView.ViewHolder{
+    public class PokemonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView name;
         private TextView index;
@@ -67,10 +71,12 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
         private ImageView image;
         private ImageView imageball;
 
+        private OnPokemonListener pokemonListener;
+
         private PokemonResultsAdapter adapter;
 
 
-        public PokemonViewHolder(@NonNull View view, PokemonResultsAdapter adapter) {
+        public PokemonViewHolder(@NonNull View view, PokemonResultsAdapter adapter, OnPokemonListener pokemonListener) {
 
             super(view);
 
@@ -81,6 +87,22 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
             imageball = (ImageView) view.findViewById(R.id.imageball);
 
             this.adapter = adapter;
+
+            this.pokemonListener = pokemonListener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.d("TAG", "onClick: " + getAdapterPosition());
+            pokemonListener.onPokemonClick(getAdapterPosition());
         }
     }
+
+    public interface OnPokemonListener {
+        void onPokemonClick(int position);
+
+    }
+
 }

@@ -33,6 +33,31 @@
 
                 <!-- IndexLayout -->
                 <LinearLayout
+                    android:id="@+id/CapturedLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/PokemonCaptured"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Captured"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <Button
+                        android:id="@+id/buttonCapture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="capturar"
+                        android:text="Capture" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/IndexLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

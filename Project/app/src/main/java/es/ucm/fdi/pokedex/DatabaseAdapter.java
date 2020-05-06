@@ -111,6 +111,19 @@ public class DatabaseAdapter {
         return row;
     }
 
+    public void modifySingleEntry(int id){
+        db = dbHelper.getWritableDatabase();
+
+        String modifyquery = "UPDATE pokemon\n" +
+                "SET captured = true\n" +
+                "WHERE id = "+id+";";
+        try{
+            db.execSQL(modifyquery);
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void initialize(){
         String response = getPokemonList();
 

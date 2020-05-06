@@ -3,6 +3,7 @@ package es.ucm.fdi.pokedex;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokedActivity extends AppCompatActivity {
+public class PokedActivity extends AppCompatActivity implements PokemonResultsAdapter.OnPokemonListener{
 
 
 
@@ -32,6 +33,12 @@ public class PokedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pokedex);
         getSupportActionBar().hide();
 
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
         pokemons = new ArrayList<PokemonInfo>();
         dba = new DatabaseAdapter(this);
 
@@ -40,7 +47,7 @@ public class PokedActivity extends AppCompatActivity {
 
         //cargamos los pokemon en el results adapter para modificar la vista
         pokemonRView = findViewById(R.id.pokedRecycler);
-        pokeResultsAdapter = new PokemonResultsAdapter(this, pokemons, dba);
+        pokeResultsAdapter = new PokemonResultsAdapter(this, pokemons, dba, this);
 
         pokemonRView.setAdapter(pokeResultsAdapter);
         // Give the RecyclerView a default layout manager.
@@ -90,4 +97,22 @@ public class PokedActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPokemonClick(int position) {
+        PokeApiConn conn = new PokeApiConn();
+        position++;
+        PokemonInfo pokemonInfo = conn.pokemonRetriever(position+"");
+
+        Intent poked = new Intent(this, PokemonViewActivity.class);
+
+        poked.putExtra("index", pokemonInfo.getIndex());
+        poked.putExtra("name", pokemonInfo.getName());
+        poked.putExtra("weight", pokemonInfo.getWeight());
+        poked.putExtra("height", pokemonInfo.getHeight());
+
+        poked.putStringArrayListExtra("types", (ArrayList<String>) pokemonInfo.getTypes());
+
+        startActivity(poked);
+
+    }
 }
