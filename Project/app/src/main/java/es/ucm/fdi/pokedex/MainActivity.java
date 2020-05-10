@@ -13,10 +13,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
+/**
+ * That's the main activity of the application. Here they are implemented the methods to access the
+ * other app's screens, FinderActivity and PokedActivity.
+ *
+ * @author Carlos Gil, Álvaro Pascual
+ */
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseAdapter dba;
 
+    /**
+     * The onCreate method checks if there's an active connection to allow the Finder button and
+     * for the first access the database intializing.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +62,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to go to Pokedex View
+     * @param view
+     */
     public void goToPokedex(View view){
         Intent poked = new Intent(this, PokedActivity.class);
 
         startActivity(poked);
     }
 
+    /**
+     * Method to go to Finder View
+     * @param view
+     */
     public void goToFinder(View view){
         Intent finder = new Intent(this, FinderActivity.class);
 
@@ -69,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(favs);
     }*/
 
+    /**
+     * This method checks if the SQLite DataBase is configured.
+     * @return if the database is intialized and configured returns true, if not returns false
+     */
     public boolean isdbConfigured(){
         dba.open();
         SQLiteDatabase db = dba.getDatabaseInstance();

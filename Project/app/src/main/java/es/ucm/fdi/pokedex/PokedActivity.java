@@ -17,6 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * PokedActivity links the list of Pokemon with the PokemonResultsAdapter to set the Pokedex
+ * screen
+ */
+
 public class PokedActivity extends AppCompatActivity implements PokemonResultsAdapter.OnPokemonListener{
 
 
@@ -55,23 +61,13 @@ public class PokedActivity extends AppCompatActivity implements PokemonResultsAd
 
         CardView cv = (CardView) findViewById(R.id.cardView);
 
-        /*
-        cv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent poked = new Intent(PokedActivity.this, FinderActivity.class);
-
-                String name = ((TextView)findViewById(R.id.PokemonName)).getText().toString();
-
-                ((EditText)findViewById(R.id.textPokemon)).setText(name);
-
-                startActivity(poked);
-            }
-        });
-        */
 
     }
 
+    /**
+     * This method queries the database to get all the pokemon to fill the pokemon list
+     * and get the image too.
+     */
     protected void readPokemon(){
         String[] row;
         PokemonInfo info;
@@ -96,7 +92,11 @@ public class PokedActivity extends AppCompatActivity implements PokemonResultsAd
         }
     }
 
-
+    /**
+     * This method sets the onclick method to go to PokemonView with the information of the pokemon's
+     *  CardView pushed.
+     * @param position that's the CardView's position in the RecyclerView
+     */
     @Override
     public void onPokemonClick(int position) {
         PokeApiConn conn = new PokeApiConn();
