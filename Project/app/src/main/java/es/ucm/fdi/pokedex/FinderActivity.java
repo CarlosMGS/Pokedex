@@ -22,7 +22,10 @@ import java.util.List;
 import es.ucm.fdi.pokedex.R;
 
 /**
- * 
+ * FinderActivity is one of the possible functions to be selected at the MainActivity. It allows
+ * the user to search a Pokemon by typing it's name, and then giving the option to click and show
+ * its details.
+ * @author Carlos Gil, Álvaro Pascual
  */
 public class FinderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<PokemonInfo>{
 
@@ -40,6 +43,11 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
     private PokemonInfo pokemonInfo;
 
+    /**
+     * The method onCreat() is launched when the Intent is created. It sets the view and launches
+     * the Loader.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -71,7 +79,8 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     /**
-     *
+     * The method SearchPokemon() collects the Pokemon's name the user types and creates the query
+     * with the info that is going to be searched.
      * @param view
      */
     public void searchPokemon(View view){
@@ -81,16 +90,18 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
         String queryString = pokeText;
 
-
-
         ((TextView) findViewById(R.id.textState)).setText("Loading...");
-
 
         Bundle queryBundle = new Bundle();
         queryBundle.putString(this.EXTRA_QUERY, queryString);
         LoaderManager.getInstance(this).restartLoader(POK_LOADER_ID, queryBundle, this);
     }
 
+    /**
+     * The method updatePokemonResults() updates the carview that contains the info of the Pokemon
+     * the user typed.
+     * @param info
+     */
     public void updatePokemonResults(PokemonInfo info){
 
         /*
@@ -117,7 +128,13 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
         }
     }
 
-
+    /**
+     * The method onCreateLoader() is launched when the Loader is called. It sets a text to show the
+     * user that the browse is taking place, and passes the query to the PokemonLoader class.
+     * @param id
+     * @param args
+     * @return a Loader with the Pokemon`s info that was found.
+     */
     @NonNull
     @Override
     public Loader<PokemonInfo> onCreateLoader(int id, @Nullable Bundle args) {
@@ -128,10 +145,14 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
     }
 
+    /**
+     * The method onLoadFinished() updates the previous text to show what is the result of the
+     * search after all the data is loaded.
+     * @param loader
+     * @param data
+     */
     @Override
     public void onLoadFinished(@NonNull Loader<PokemonInfo> loader, PokemonInfo data) {
-
-
 
         if (data.getIndex()!= null) {
 
@@ -149,6 +170,10 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
 
     }
 
+    /**
+     * The method onLoadReset() allows to reset the Loader and notifies that changes have been made.
+     * @param loader
+     */
     @Override
     public void onLoaderReset(@NonNull Loader<PokemonInfo> loader) {
 
@@ -156,7 +181,13 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
         pokeResultsAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * The method loadPokemonView() creates a new PokemonViewActivity Intent and passes all the info
+     * of the Pokemon the user typed.
+     * @param view
+     */
     public void loadPokemonView(View view){
+
         Intent poked = new Intent(this, PokemonViewActivity.class);
         poked.putExtra("index", pokemonInfo.getIndex());
         poked.putExtra("name", pokemonInfo.getName());

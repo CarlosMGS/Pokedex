@@ -19,6 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * PokemonViewActivity shows some of the details and stats of a specified Pokemon when selected from
+ * the Pokedex (PokedActivity) or the Pokemon browser (FinderActivity).
+ *
+ * @author Carlos Gil, Álvaro Pascual
+ */
 public class PokemonViewActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<PokemonInfo>{
 
     public static final String EXTRA_QUERY = "queryString";
@@ -30,6 +37,12 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
 
     public PokemonViewActivity() {}
 
+    /**
+     * THe method onCreate() is launched when the Intent is created. It sets the view, prepares the
+     * different parts of the view that are going to get modified, establishes connection with the
+     * database and obtain the relative info of a Pokemon.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +74,9 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         setPokemonInfo();
     }
 
+    /**
+     * The method setPokemonInfo() sets the stats to a certain searched Pokemon in the view.
+     */
     private void setPokemonInfo() {
 
         // image view
@@ -81,10 +97,19 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         List<PokemonInfo> auxList = new ArrayList<>();
         auxList.add(info);
 
-        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(this, auxList);
+        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(this, auxList, 0);
         recyclerType.setAdapter(pokemonTypeAdapter);
+        /*
+        if (info.getTypes().size() == 2){
+            PokemonTypeAdapter pokemonTypeAdapter2 = new PokemonTypeAdapter(this, auxList, 1);
+            recyclerType.setAdapter(pokemonTypeAdapter2);
+        }*/
     }
 
+    /**
+     * The method isCaptured() checks if a Pokemon has been marked as 'captured' or not, and modify
+     * its status.
+     */
     public void isCaptured(){
 
         int position = Integer.parseInt(info.getIndex());
@@ -103,6 +128,10 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         }
     }
 
+    /**
+     * The method capturar() sets in the view the status of a Pokemon to 'captured'.
+     * @param view
+     */
     public void capturar(View view){
         int id = Integer.parseInt(info.getIndex());
         dba.modifySingleEntry(id);

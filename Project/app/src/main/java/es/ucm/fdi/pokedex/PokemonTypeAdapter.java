@@ -17,10 +17,12 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
 
     private LayoutInflater inflater;
     private List<PokemonInfo> pokemonList;
+    private int typePos;
 
-    public PokemonTypeAdapter(Context context, List<PokemonInfo> pokemonList) {
+    public PokemonTypeAdapter(Context context, List<PokemonInfo> pokemonList, int typePos) {
         this.inflater = LayoutInflater.from(context);
         this.pokemonList = pokemonList;
+        this.typePos = typePos;
     }
 
     @NonNull
@@ -34,17 +36,9 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
     public void onBindViewHolder(@NonNull PokemonTypeAdapter.PokemonViewHolder holder, int position) {
         PokemonInfo current = pokemonList.get(position);
 
-        if (current.getTypes().size() == 1){
-            holder.chip1.setChipText(current.getTypes().get(0));
-            holder.chip1.changeBackgroundColor(getColorByType(current.getTypes().get(0)));
-        }
-        else{
-            holder.chip1.setChipText(current.getTypes().get(0));
-            holder.chip1.changeBackgroundColor(getColorByType(current.getTypes().get(0)));
+        holder.chip.setChipText(current.getTypes().get(this.typePos));
+        holder.chip.changeBackgroundColor(getColorByType(current.getTypes().get(this.typePos)));
 
-            holder.chip2.setChipText(current.getTypes().get(1));
-            holder.chip2.changeBackgroundColor(getColorByType(current.getTypes().get(1)));
-        }
     }
 
     @Override
@@ -52,21 +46,23 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
 
     public  class PokemonViewHolder extends RecyclerView.ViewHolder{
 
-        private Chip chip1, chip2;
+        private Chip chip;
         private PokemonTypeAdapter pokemonTypeAdapter;
 
         public PokemonViewHolder(View itemView, PokemonTypeAdapter pokemonTypeAdapter) {
             super(itemView);
 
-            chip1 = (Chip)itemView.findViewById(R.id.chip1);
-            chip2 = (Chip)itemView.findViewById(R.id.chip2);
+            chip = itemView.findViewById(R.id.chip);
             this.pokemonTypeAdapter = pokemonTypeAdapter;
         }
     }
 
 
-
-    /* get the color of each type */
+    /**
+     * The method getColorByType() returns the color of an input type.
+     * @param type : Pokemon´s type
+     * @return
+     */
     public int getColorByType(String type) {
         switch(type)
         {

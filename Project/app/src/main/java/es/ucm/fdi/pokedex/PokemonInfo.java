@@ -6,6 +6,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * PokemonInfo has the details and stats of a Pokemon. From its name to its image.
+ * @author Carlos Gil, Álvaro Pascual
+ */
 class PokemonInfo {
 
     private String name;
@@ -15,10 +19,20 @@ class PokemonInfo {
     private String weight;
     private int image;
 
-    public PokemonInfo() {
+    /**
+     * Empty constructor.
+     */
+    public PokemonInfo() {}
 
-    }
-
+    /**
+     * Parametrized constructor.
+     * @param name
+     * @param index
+     * @param types
+     * @param height
+     * @param weight
+     * @param image
+     */
     public PokemonInfo(String name, String index, List<String> types, String height, String weight, int image) {
         this.name = name;
         this.index = index;
@@ -64,9 +78,14 @@ class PokemonInfo {
 
     public void setImage(int image) { this.image = image; }
 
+    /**
+     * The method fromJsonResponse() analyses the casted String of the JSON obtained from the API with
+     * all the Pokemon info, and extracts it by splitting the JSON in all its different parts.
+     * @param input
+     * @return a PokemonInfo object.
+     */
     public static PokemonInfo fromJsonResponse(String input){
         PokemonInfo pokemon = new PokemonInfo();
-
 
         try{
             JSONObject json = new JSONObject(input);
@@ -94,12 +113,11 @@ class PokemonInfo {
 
             //load sprite
             JSONArray sprites = (JSONArray) json.get("sprites");
-            String frontDefaultSprite = sprites.getString(Integer.parseInt("front_default"));
+            String frontDefaultSprite = sprites.getString(Integer.parseInt("front_default")); //esto se usa?
 
         }catch(Exception e){
             e.printStackTrace();
         }
-
 
         return pokemon;
     }
