@@ -35,6 +35,8 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon_view);
 
+        getSupportActionBar().hide();
+
         pokemonImage = findViewById(R.id.PokemonImage);
         pokemonIndex = findViewById(R.id.PokemonIndex);
         pokemonName = findViewById(R.id.PokemonName);

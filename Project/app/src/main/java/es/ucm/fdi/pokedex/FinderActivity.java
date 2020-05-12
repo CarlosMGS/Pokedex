@@ -21,6 +21,9 @@ import java.util.List;
 
 import es.ucm.fdi.pokedex.R;
 
+/**
+ * 
+ */
 public class FinderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<PokemonInfo>{
 
     public static final int POK_LOADER_ID = 100;
@@ -58,15 +61,19 @@ public class FinderActivity extends AppCompatActivity implements LoaderManager.L
         List<PokemonInfo> list = new ArrayList<>();
         list.add(pokemonInfo);
 
-        pokemonRView = findViewById(R.id.pokemonView);
+        //pokemonRView = findViewById(R.id.pokemonView);
         //pokeResultsAdapter= new PokemonResultsAdapter(this, list); // en lugar de pasar un solo poke, se pasa una lista de un solo poke
 
-        pokemonRView.setAdapter(pokeResultsAdapter);
+        //pokemonRView.setAdapter(pokeResultsAdapter);
         // Give the RecyclerView a default layout manager.
-        pokemonRView.setLayoutManager(new LinearLayoutManager(this));
+        //pokemonRView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
+    /**
+     *
+     * @param view
+     */
     public void searchPokemon(View view){
 
         /* pokemon text*/

@@ -13,11 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FinderActivity"></activity>
-        <activity android:name=".FavsActivity"></activity>
-        <activity android:name=".PokedActivity"></activity>
-        <activity android:name=".PokemonViewActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".FinderActivity"
+            android:screenOrientation="fullSensor"></activity>
+        <activity android:name=".FavsActivity"
+            android:screenOrientation="fullSensor"></activity>
+        <activity android:name=".PokedActivity"
+            android:screenOrientation="fullSensor"></activity>
+        <activity android:name=".PokemonViewActivity"
+            android:screenOrientation="fullSensor"></activity>
+        <activity android:name=".MainActivity"
+                  android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
