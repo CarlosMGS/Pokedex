@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 import androidx.annotation.Nullable;
 
+/**
+ * This class is an interface to create the database
+ */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
 

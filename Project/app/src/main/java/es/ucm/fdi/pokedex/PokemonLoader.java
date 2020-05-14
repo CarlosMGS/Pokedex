@@ -8,6 +8,9 @@ import androidx.loader.content.AsyncTaskLoader;
 
 import java.util.List;
 
+/**
+ * This class extends the AsyncTaskLoader to load the PokemonInfo and refresh the FinderActivity
+ */
 public class PokemonLoader extends AsyncTaskLoader<PokemonInfo> {
 
 
@@ -38,6 +41,11 @@ public class PokemonLoader extends AsyncTaskLoader<PokemonInfo> {
 
     }
 
+    /**
+     * This method retrieves the PokemonInfo object
+     * @param queryString The Pokemon name
+     * @return The PokemonInfo
+     */
     protected PokemonInfo LoadData(String queryString){
 
         PokemonInfo info;

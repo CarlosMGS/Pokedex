@@ -21,6 +21,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * This class implements the methods to query, insert and update the SQLite Database
+ */
 public class DatabaseAdapter {
 
     static final String DATABASE_NAME = "database.db";
@@ -45,28 +48,43 @@ public class DatabaseAdapter {
     }
 
 
-    // Method to openthe Database
+    /**
+     * This method open a connection with the database with write permission
+     * @return The DatabaseAdapter instance
+     * @throws SQLException
+     */
     public  DatabaseAdapter open() throws SQLException
     {
         db = dbHelper.getWritableDatabase();        return this;
     }
 
 
-    // Method to close the Database
+    /**
+     * This method close the connection to de database
+     */
     public void close()
     {
         db.close();
     }
 
 
-    // method returns an Instance of the Database
+    /**
+     * This method returns an instance of the SQLiteDatabase
+     * @return SQLite Database
+     */
     public  SQLiteDatabase getDatabaseInstance()
     {
         return db;
     }
 
 
-    // method to insert a record in Table
+    /**
+     * This method insert a single row into the table Pokemon of the database
+     * @param id column id
+     * @param name column name
+     * @param captured column captured
+     * @return ok if everything was ok
+     */
     public String insertEntry(int id,String name, Boolean captured)
     {
         try {
@@ -89,7 +107,11 @@ public class DatabaseAdapter {
     }
 
 
-    // method to get the password  of userName
+    /**
+     * This method retrieves a single row of the table Pokemon of the database
+     * @param id column id
+     * @return the full row
+     */
     public String[] getSinlgeEntry(int id)
     {
         db=dbHelper.getReadableDatabase();
@@ -111,6 +133,10 @@ public class DatabaseAdapter {
         return row;
     }
 
+    /**
+     * This method update a single row of the table Pokemon of the database
+     * @param id column id
+     */
     public void modifySingleEntry(int id){
         db = dbHelper.getWritableDatabase();
 
@@ -124,6 +150,10 @@ public class DatabaseAdapter {
         }
     }
 
+
+    /**
+     * This method intializes the database for the first app access
+     */
     public void initialize(){
         String response = getPokemonList();
 
@@ -154,7 +184,10 @@ public class DatabaseAdapter {
 
     }
 
-
+    /**
+     * This method queries the api to get the full pokemon list
+     * @return The JSON string
+     */
     public String getPokemonList()
     {
 
@@ -218,6 +251,12 @@ public class DatabaseAdapter {
         return "Error";
     }
 
+    /**
+     * This method transforms the InputStream to String
+     * @param response The Stream from the API
+     * @return String with JSON format
+     * @throws IOException
+     */
     private String inputToString(InputStream response) throws IOException {
 
         BufferedReader reader = null;

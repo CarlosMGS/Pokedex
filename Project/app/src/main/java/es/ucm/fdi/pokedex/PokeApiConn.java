@@ -14,11 +14,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * This class connects with the API to get the PokemonInfo
+ */
 public class PokeApiConn {
 
     private static final String DEBUG_TAG = PokeApiConn.class.getSimpleName();
     private final String BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
+    /**
+     * This method creates the URL to query the API
+     * @param queryString The Pokemon name
+     * @return The URL
+     */
     public String createURL(String queryString){
 
         String queryParam = "";
@@ -32,6 +40,11 @@ public class PokeApiConn {
         return builtURI.toString();
     }
 
+    /**
+     * This method transform the Pokemon JSON into a PokemonInfo object
+     * @param queryString Pokemon name
+     * @return A PokemonInfo Object
+     */
     public PokemonInfo pokemonRetriever(String queryString){
 
         String url = this.createURL(queryString);
@@ -51,6 +64,12 @@ public class PokeApiConn {
         return pokemon;
     }
 
+    /**
+     * This method connects to the API to get the InputStream
+     * @param url The API URL with the Pokemon name
+     * @return Pokemon JSON String
+     * @throws IOException
+     */
     private String connect(String url) throws IOException {
 
         InputStream response = null;
@@ -97,6 +116,12 @@ public class PokeApiConn {
 
     }
 
+    /**
+     * This method transforms the InputStream to a JSON String
+     * @param response The InputStream from the connection
+     * @return The JSON String
+     * @throws IOException
+     */
     private String inputToString(InputStream response) throws IOException {
 
         BufferedReader reader = null;

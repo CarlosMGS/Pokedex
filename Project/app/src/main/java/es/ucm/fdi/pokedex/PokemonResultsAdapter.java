@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * This class sets the list of Pokemon in the Pokedex with the RecyclerView
+ */
 public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAdapter.PokemonViewHolder> {
 
     private List<PokemonInfo> pokemonList;
@@ -59,10 +62,17 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
         return pokemonList.size();
     }
 
+    /**
+     * This method sets the List<PokemonInfo>
+     * @param info The List<PokemonInfo>
+     */
     public void setPokemonData(List<PokemonInfo> info) {
         pokemonList = info;
     }
 
+    /**
+     * This class sets the View for a single Pokemon in the RecyclerView
+     */
     public class PokemonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView name;
@@ -93,6 +103,10 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
             itemView.setOnClickListener(this);
         }
 
+        /**
+         * This method sets the onClick behaviour for the CardView
+         * @param v
+         */
         @Override
         public void onClick(View v) {
             Log.d("TAG", "onClick: " + getAdapterPosition());
@@ -100,6 +114,9 @@ public class PokemonResultsAdapter extends RecyclerView.Adapter<PokemonResultsAd
         }
     }
 
+    /**
+     * This interface is used for setting the CardView's OnClickListener
+     */
     public interface OnPokemonListener {
         void onPokemonClick(int position);
 
