@@ -93,17 +93,9 @@ public class PokemonViewActivity extends AppCompatActivity implements LoaderMana
 
         isCaptured();
 
-        /* lista auxiliar que contiene el único pokemon que buscamos */
-        List<PokemonInfo> auxList = new ArrayList<>();
-        auxList.add(info);
-
-        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(this, auxList, 0);
+        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(this, info.getTypes());
         recyclerType.setAdapter(pokemonTypeAdapter);
-        /*
-        if (info.getTypes().size() == 2){
-            PokemonTypeAdapter pokemonTypeAdapter2 = new PokemonTypeAdapter(this, auxList, 1);
-            recyclerType.setAdapter(pokemonTypeAdapter2);
-        }*/
+        recyclerType.setLayoutManager(new LinearLayoutManager(this));
     }
 
     /**

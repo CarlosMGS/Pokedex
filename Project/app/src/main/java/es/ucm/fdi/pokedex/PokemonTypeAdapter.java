@@ -16,13 +16,11 @@ import java.util.List;
 public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.PokemonViewHolder> {
 
     private LayoutInflater inflater;
-    private List<PokemonInfo> pokemonList;
-    private int typePos;
+    private List<String> pokemonTypes;
 
-    public PokemonTypeAdapter(Context context, List<PokemonInfo> pokemonList, int typePos) {
+    public PokemonTypeAdapter(Context context, List<String> pokemonTypes) {
         this.inflater = LayoutInflater.from(context);
-        this.pokemonList = pokemonList;
-        this.typePos = typePos;
+        this.pokemonTypes = pokemonTypes;
     }
 
     @NonNull
@@ -34,15 +32,14 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PokemonTypeAdapter.PokemonViewHolder holder, int position) {
-        PokemonInfo current = pokemonList.get(position);
+        String current = this.pokemonTypes.get(position);
 
-        holder.chip.setChipText(current.getTypes().get(this.typePos));
-        holder.chip.changeBackgroundColor(getColorByType(current.getTypes().get(this.typePos)));
-
+        holder.chip.setChipText(current);
+        holder.chip.changeBackgroundColor(getColorByType(current));
     }
 
     @Override
-    public int getItemCount() { return pokemonList.size(); }
+    public int getItemCount() { return pokemonTypes.size(); }
 
     public  class PokemonViewHolder extends RecyclerView.ViewHolder{
 
