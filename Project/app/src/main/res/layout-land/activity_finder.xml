@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F44336">
 
+
+    <!-- two columns division linear layout -->
+
     <TextView
         android:id="@+id/textFinder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/press_start_2p"
         android:text="Finder"
         android:textColor="#FFC107"
@@ -19,88 +23,113 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/textPokemon"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:fontFamily="@font/press_start_2p"
-        android:hint="Pokemon"
-        android:inputType="textPersonName"
-        android:textColor="#FFC107"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFinder" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textFinder"
+        tools:layout_editor_absoluteX="0dp">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#009688"
-        android:onClick="searchPokemon"
-        android:text="search"
-        android:textColor="#FFC107"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPokemon" />
-
-    <TextView
-        android:id="@+id/textState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/press_start_2p"
-        android:textColor="#FF9800"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="411dp"
-        android:layout_height="164dp"
-        android:layout_marginTop="50dp"
-        android:onClick="loadPokemonView"
-        app:cardBackgroundColor="#F44336"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="7dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
-
+        <!-- Browser menu -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:textAlignment="center">
+            android:paddingLeft="20dp"
+            android:paddingRight="32dp">
 
-            <TextView
-                android:id="@+id/pokename"
+            <EditText
+                android:id="@+id/textPokemon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#2196F3"
-                android:textSize="30sp" />
+                android:layout_marginTop="20dp"
+                android:ems="12"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:hint="Pokemon"
+                android:inputType="textPersonName"
+                android:textColor="#FFC107"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textFinder" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="140dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#2196F3"
+                android:onClick="searchPokemon"
+                android:text="search"
+                android:textColor="#FFC107"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textPokemon" />
 
             <TextView
-                android:id="@+id/pokeid"
+                android:id="@+id/textState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#F44336"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/poketypes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#4CAF50"
-                android:textSize="24sp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/press_start_2p"
+                android:textColor="#FF9800"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+        <!-- Result query Cardview -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="320dp"
+            android:layout_height="164dp"
+            android:onClick="loadPokemonView"
+            app:cardBackgroundColor="#F44336"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="7dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:textAlignment="center">
+
+                <TextView
+                    android:id="@+id/pokename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2196F3"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/pokeid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#F44336"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/poketypes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#4CAF50"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
